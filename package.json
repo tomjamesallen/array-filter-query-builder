@@ -2,9 +2,11 @@
   "name": "array-filter-query-builder",
   "version": "0.1.0",
   "description": "Provides a query builder and filter to filter array of items.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compile": "babel -d lib src/",
+    "prepublish": "npm run compile"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/tomjamesallen/array-filter-query-builder/issues"
   },
-  "homepage": "https://github.com/tomjamesallen/array-filter-query-builder#readme"
+  "homepage": "https://github.com/tomjamesallen/array-filter-query-builder#readme",
+  "devDependencies": {
+    "babel-cli": "^6.7.7",
+    "babel-preset-es2015": "^6.6.0"
+  }
 }
