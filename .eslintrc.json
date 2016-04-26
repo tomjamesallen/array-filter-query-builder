@@ -1,0 +1,18 @@
+{
+  "extends": ["standard"],
+  "ecmaFeatures": {
+    "classes": true
+  },
+  "parser": "babel-eslint",
+  "rules": {
+    "brace-style": [2, "stroustrup", { "allowSingleLine": true }],
+    "space-before-function-paren": [2, "never"],
+    "keyword-spacing": [2, {
+      "before": true,
+      "after": true,
+      "overrides": {}
+    }],
+    "eol-last": 2,
+    "no-multiple-empty-lines": [2, {"max": 2, "maxEOF": 0}]
+  }
+}
