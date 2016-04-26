@@ -1,0 +1,19 @@
+{
+  "name": "array-filter-query-builder",
+  "version": "0.1.0",
+  "description": "Provides a query builder and filter to filter array of items.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tomjamesallen/array-filter-query-builder.git"
+  },
+  "author": "tom allen <tomjamesallenweb@gmail.com> (http://tomjamesallen.co.uk)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tomjamesallen/array-filter-query-builder/issues"
+  },
+  "homepage": "https://github.com/tomjamesallen/array-filter-query-builder#readme"
+}
