@@ -10,7 +10,7 @@ describe('`Filter` class should be a function', () => {
 })
 
 describe('Running `new` on `Filter` class should return an object', () => {
-  it('should be an object', () => {
+  it('should be a object', () => {
     expect(typeof new Filter()).to.equal('object')
   })
 })
