@@ -1,3 +1,5 @@
-export default {
-  s: 'a'
+export default class QueryBuilder {
+  constructor() {
+    
+  }
 }

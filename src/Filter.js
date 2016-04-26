@@ -1,3 +1,5 @@
-export default {
-  something: 's'
+export default class Filter {
+  constructor() {
+    
+  }
 }
