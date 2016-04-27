@@ -115,9 +115,17 @@ describe('A `Query`s `replace` method should behave in the same way as the `add`
   })
 })
 
+describe('A `Query`s methods should be chainable', () => {
+  it('should have chainable methods', () => {
+    let serialised = new QueryBuilder()
+      .add('boolTestField', {
+        is: false
+      })
+      .add('numericTestField', {
+        is: 3
+      })
+      .serialise()
 
-// it('should update a query property from `update` and then return that updated property from `serialise`', () => {
-
-//   })
-
-//   it('should accept an object of query properties')
+    expect(serialised.length).to.equal(2)
+  })
+})
