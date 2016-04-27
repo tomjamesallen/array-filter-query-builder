@@ -1,2 +1,2 @@
 require('./checkTypes')
-// require('./createNewQuery')
+require('./basicQueryChecks')
