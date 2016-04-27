@@ -1,8 +1,4 @@
-export default {
-  'valueTestField': {
-    isNot: 'first'
-  },
-  'numericTestField': {
-    isAtLeast: 3
-  }
-}
+export default [
+  ['valueTestField', 'isNot', 'first'],
+  ['numericTestField', 'isAtLeast', 3]
+]
