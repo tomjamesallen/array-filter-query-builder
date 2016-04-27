@@ -1,11 +1,6 @@
-export default filterMethods = {
-  atLeast(input) {
-
-  },
-  isOneOf(input) {
-
-  },
-  is(input) {
-    
-  }
+export default {
+  isAtLeast(input) {},
+  isOneOf(input) {},
+  is(input) {},
+  isNot(input) {}
 }
