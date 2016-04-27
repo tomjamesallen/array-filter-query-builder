@@ -6,23 +6,6 @@ export default class QueryBuilder {
     this.deserialise(importArray)
   }
 
-  // reset(keyInput = null) {
-  //   if (keyInput === null) {
-  //     this._currentQuery = {}
-  //   }
-  //   else if (Array.isArray(keyInput)) {
-  //     let keys = keyInput
-  //     keys.forEach((key) => {
-  //       delete this._currentQuery[key]
-  //     })
-  //   }
-  //   else if (typeof keyInput === 'string') {
-  //     let key = keyInput
-  //     delete this._currentQuery[key]
-  //   }
-  //   return this
-  // }
-
   _addItemToCurrentQuery(fieldKey, comparator, value) {
     const queryArgument = [fieldKey, comparator, value]
     this._currentQuery.push(queryArgument)
@@ -77,8 +60,21 @@ export default class QueryBuilder {
     return this
   }
 
-  reset() {
-    
+  reset(keyInput = null) {
+    if (keyInput === null) {
+      this._currentQuery = []
+    }
+    else if (Array.isArray(keyInput)) {
+      let fieldKeys = keyInput
+      fieldKeys.forEach((fieldKey) => {
+        this._removeKeyFromCurrentQuery(fieldKey)
+      })
+    }
+    else if (typeof keyInput === 'string') {
+      let fieldKey = keyInput
+      this._removeKeyFromCurrentQuery(fieldKey)
+    }
+    return this
   }
 
   deserialise(importArray) {
