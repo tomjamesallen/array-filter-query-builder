@@ -10,10 +10,41 @@ export default class Filter {
     this.config = assign(defaultConfig, instanceConfig)
   }
 
-  returnFilteredItemsData(items = [], query = []) {
+  testQueryArgument(item, queryArgument) {
+    // console.log('testQueryArgument', {
+    //   item, queryArgument
+    // })
+    return true
+  }
+
+  getQueryArguments(query) {
+    let queryArguments = []
+    if (query && typeof query.serialise === 'function') {
+      let serialised = query.serialise()
+      if (Array.isArray(serialised)) {
+        queryArguments = serialised
+      }
+    }
+
+    return queryArguments
+  }
+
+  returnFilteredItemsData(items = [], query = false) {
     items = items.map((item, i) => {
       item[ORIGINAL_INDEX_KEY] = i
       return item
+    })
+
+    const queryArguments = this.getQueryArguments(query)
+
+    items = items.filter((item) => {
+      let passed = true
+      queryArguments.forEach((queryArgument) => {
+        if (!this.testQueryArgument(item, queryArgument)) {
+          passed = false
+        }
+      })
+      return passed
     })
     return items
   }

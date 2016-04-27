@@ -24,3 +24,13 @@ describe('A `Filter`s `returnFilteredIndexes` method should return the full arra
     expect(filteredIndexes[filteredIndexes.length - 1]).to.equal(filteredIndexes.length - 1)
   })
 })
+
+describe('A `Filter`s `run` method should filter based on the `Query` instance that it’s passed', () => {
+  it('should filter the items', () => {
+    let query = new QueryBuilder().add('boolTestField', {
+      is: true
+    })
+    const filtered = new Filter().run(dummyItems1, query)
+    // console.log(filtered)
+  })
+})
