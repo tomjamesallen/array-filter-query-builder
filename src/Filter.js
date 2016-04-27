@@ -1,4 +1,5 @@
 import assign from 'object-assign'
+const ORIGINAL_INDEX_KEY = '__filterOriginalIndex'
 
 const defaultConfig = {
   nestedFilters: false
@@ -9,8 +10,19 @@ export default class Filter {
     this.config = assign(defaultConfig, instanceConfig)
   }
 
-  returnFilteredItems(items = [], query = []) {
-    if (!query.length) return items
+  returnFilteredItemsData(items = [], query = []) {
+    items = items.map((item, i) => {
+      item[ORIGINAL_INDEX_KEY] = i
+      return item
+    })
+    return items
+  }
+
+  returnFilteredItems(items, query) {
+    return this.returnFilteredItemsData(items, query).map((item) => {
+      delete item[ORIGINAL_INDEX_KEY]
+      return item
+    })
   }
 
   run(items, query) {
@@ -18,7 +30,9 @@ export default class Filter {
   }
 
   returnFilteredIndexes(items, query) {
-
+    return this.returnFilteredItemsData(items, query).map((item) => {
+      return item[ORIGINAL_INDEX_KEY]
+    })
   }
 
   updateConfig(instanceConfig) {
