@@ -1,2 +1,2 @@
 require('./checkTypes')
-require('./basicQueryChecks')
+require('./queryBuilderChecks')
