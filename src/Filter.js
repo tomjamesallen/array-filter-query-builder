@@ -9,12 +9,12 @@ export default class Filter {
     this.config = assign(defaultConfig, instanceConfig)
   }
 
-  run(items, query) {
-    this.returnFilteredItems(items, query)
+  returnFilteredItems(items = [], query = []) {
+    if (!query.length) return items
   }
 
-  returnFilteredItems(items, query) {
-    if (!Array.isArray(items)) return
+  run(items, query) {
+    return this.returnFilteredItems(items, query)
   }
 
   returnFilteredIndexes(items, query) {
