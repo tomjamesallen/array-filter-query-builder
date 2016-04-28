@@ -6,7 +6,27 @@ import { QueryBuilder } from '../index'
 import dummyQuery1 from '../fixtures/query1'
 import dummyQuery2 from '../fixtures/query2'
 
-describe('New `Query` instance’s should return an empty array from `serialise`', () => {
+function compareNestedArrays(array1, array2) {
+  let isEqual = true
+
+  array1.forEach((array1Item, i) => {
+    const array2Item = array2[i]
+    if (typeof array2Item !== 'object') {
+      isEqual = false
+      return
+    }
+    array1Item.forEach((array1NestedItem, i) => {
+      const array2NestedItem = array2Item[i]
+      if (array1NestedItem !== array2NestedItem) {
+        isEqual = false
+      }
+    })
+  })
+
+  return isEqual
+}
+
+describe('A `Query` instance should return an empty array from `serialise`', () => {
   it('should generate a new query, which should return an empty array from `serialise`', () => {
     let query = new QueryBuilder()
     const serialised = query.serialise()
@@ -15,11 +35,11 @@ describe('New `Query` instance’s should return an empty array from `serialise`
   })
 })
 
-describe('New `Query` instance’s should accept a serialised array of query arguments', () => {
+describe('A `Query` instance should accept a serialised array of query arguments', () => {
   it('should accept a serialised array of query arguments in the constructor method and then return an array from `serialise` that is `shallowequal`.', () => {
     let query = new QueryBuilder(dummyQuery1)
     const serialised = query.serialise()
-    expect(shallowequal(dummyQuery1, serialised)).to.equal(true)
+    expect(compareNestedArrays(dummyQuery1, serialised)).to.equal(true)
   })
 })
 
@@ -95,21 +115,7 @@ describe('A `Query` instance’s `replace` method should behave in the same way 
     const end = serialised.length
     const newItems = serialised.slice(start, end)
 
-    let isEqual = true
-
-    dummyQuery2.forEach((queryArgument, i) => {
-      const newItemsQueryArgument = newItems[i]
-      if (typeof newItemsQueryArgument !== 'object') {
-        isEqual = false
-        return
-      }
-      queryArgument.forEach((arg, i) => {
-        const newItemsQueryArgumentArg = newItemsQueryArgument[i]
-        if (arg !== newItemsQueryArgumentArg) {
-          isEqual = false
-        }
-      })
-    })
+    let isEqual = compareNestedArrays(dummyQuery2, newItems)
 
     expect(isEqual).to.equal(true)
   })
@@ -157,4 +163,8 @@ describe('A `Query` instance’s methods should be chainable', () => {
 
     expect(serialised.length).to.equal(2)
   })
+})
+
+describe('A `Query` instance should be clone-able', () => {
+
 })
