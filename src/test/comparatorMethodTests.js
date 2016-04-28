@@ -93,6 +93,41 @@ describe('Comparator methods', () => {
     })
   })
 
+  describe('#anyMatchesAny', () => {
+    it('should take an input array and test against an array and if any of the items from the first array match any of the items from the second array then return true', () => {
+      const filter = new Filter()
+      const query = new QueryBuilder('multiMatch', {
+        anyMatchesAny: ['FirstRef', 'SecondRef']
+      })
+      const filteredIndexes = filter.returnFilteredIndexes(dummyItems1, query)
+      expect(filteredIndexes.length).to.equal(2)
+      expect(filteredIndexes[0]).to.equal(0)
+      expect(filteredIndexes[1]).to.equal(1)
+
+      const query2 = new QueryBuilder('multiMatch', {
+        anyMatchesAny: ['FirstRef', 'ThirdRef']
+      })
+      const filteredIndexes2 = filter.returnFilteredIndexes(dummyItems1, query2)
+      expect(filteredIndexes2.length).to.equal(3)
+
+      const query3 = new QueryBuilder('multiMatch', {
+        anyMatchesAny: 'SecondRef'
+      })
+      const filteredIndexes3 = filter.returnFilteredIndexes(dummyItems1, query3)
+      expect(filteredIndexes3.length).to.equal(2)
+      expect(filteredIndexes3[0]).to.equal(0)
+      expect(filteredIndexes3[1]).to.equal(1)
+
+      const query4 = new QueryBuilder('multiMatch', {
+        anyMatchesAny: 'ThirdRef'
+      })
+      const filteredIndexes4 = filter.returnFilteredIndexes(dummyItems1, query4)
+      expect(filteredIndexes4.length).to.equal(2)
+      expect(filteredIndexes4[0]).to.equal(1)
+      expect(filteredIndexes4[1]).to.equal(2)
+    })
+  })
+
   describe('#isAtLeast', () => {
     it('should test that a numeric field value is at least as large (greater than or equal to) the given value', () => {
       const filter = new Filter()
