@@ -8,7 +8,7 @@ import { QueryBuilder, Filter } from '../index'
 import dummyItems1 from '../fixtures/items1'
 import dummyItems2 from '../fixtures/items2'
 
-describe('A `Filter`s `run` method should return the full items array if not passed a query', () => {
+describe('A `Filter` instace’s `run` method should return the full items array if not passed a query', () => {
   it('should return full items array', () => {
     let filter = new Filter()
     let filtered = filter.run(dummyItems1)
@@ -16,7 +16,7 @@ describe('A `Filter`s `run` method should return the full items array if not pas
   })
 })
 
-describe('A `Filter`s `returnFilteredIndexes` method should return the full array of input indexes if not passed a query', () => {
+describe('A `Filter` instace’s `returnFilteredIndexes` method should return the full array of input indexes if not passed a query', () => {
   it('should return full array of indexes', () => {
     let filter = new Filter()
     let filteredIndexes = filter.returnFilteredIndexes(dummyItems1)
@@ -25,7 +25,7 @@ describe('A `Filter`s `returnFilteredIndexes` method should return the full arra
   })
 })
 
-describe('A `Filter`s `run` method should filter based on the `Query` instance that it’s passed', () => {
+describe('A `Filter` instace’s `run` method should filter based on the `Query` instance that it’s passed', () => {
   it('should filter the items', () => {
     const filter = new Filter()
 
@@ -65,4 +65,10 @@ describe('A `Filter` constructor should accept a `nestedFilterFieldsObject` prop
     expect(Array.isArray(filtered2)).to.equal(true)
     expect(filtered2.length).to.equal(2)
   })
+})
+
+describe('A `Filter` instace’s run method should accept an array of query arguments', () => {
+})
+
+describe('A `Filter` instace should reproduce the same results from a serialised then deserialised query as from the original query.', () => {
 })
