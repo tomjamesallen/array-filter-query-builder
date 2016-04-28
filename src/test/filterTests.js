@@ -67,8 +67,5 @@ describe('A `Filter` constructor should accept a `nestedFilterFieldsObject` prop
   })
 })
 
-describe('A `Filter` instace’s run method should accept an array of query arguments', () => {
-})
-
 describe('A `Filter` instace should reproduce the same results from a serialised then deserialised query as from the original query.', () => {
 })
