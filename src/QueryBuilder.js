@@ -1,9 +1,9 @@
 import clone from 'clone'
 
 export default class QueryBuilder {
-  constructor(importArray) {
+  constructor(...args) {
     this._currentQuery = []
-    this.deserialise(importArray)
+    this.add(...args)
   }
 
   _addItemToCurrentQuery(fieldKey, comparator, value) {
@@ -73,15 +73,6 @@ export default class QueryBuilder {
     else if (typeof keyInput === 'string') {
       let fieldKey = keyInput
       this._removeKeyFromCurrentQuery(fieldKey)
-    }
-    return this
-  }
-
-  deserialise(importArray) {
-    if (Array.isArray(importArray)) {
-      importArray.forEach((item) => {
-        this._currentQuery.push(item)
-      })
     }
     return this
   }
