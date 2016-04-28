@@ -1,14 +1,15 @@
 import assign from 'object-assign'
 import comparatorMethods from './comparatorMethods'
+import clone from 'clone'
 
 const ORIGINAL_INDEX_KEY = '__filterOriginalIndex'
-const defaultConfig = {
-  nestedFilterFieldsObject: false
-}
 
 export default class Filter {
   constructor(instanceConfig) {
-    this.config = assign(defaultConfig, instanceConfig)
+    this.config = assign({
+      nestedFilterFieldsObject: false,
+      customComparatorMethods: {}
+    }, instanceConfig)
   }
 
   _getFieldValue(item, fieldKey) {
@@ -29,10 +30,15 @@ export default class Filter {
   }
 
   _testComparator(fieldValue, comparator, testValue) {
-    if (typeof comparatorMethods[comparator] !== 'function') {
+    if (typeof comparatorMethods[comparator] === 'function') {
+      return comparatorMethods[comparator](fieldValue, testValue)
+    }
+    else if (typeof this.customComparatorMethods[comparator] === 'function') {
+      return this.customComparatorMethods[comparator](fieldValue, testValue)
+    }
+    else {
       return false
     }
-    return comparatorMethods[comparator](fieldValue, testValue)
   }
 
   _testQueryArgument(item, queryArgument) {
@@ -55,7 +61,8 @@ export default class Filter {
     return queryArguments
   }
 
-  returnFilteredItemsData(items = [], query = false) {
+  returnFilteredItemsData(inputItems = [], query = false) {
+    let items = clone(inputItems)
     items = items.map((item, i) => {
       item[ORIGINAL_INDEX_KEY] = i
       return item
