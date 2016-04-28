@@ -1,10 +1,10 @@
 /* global describe, it */
 import { expect } from 'chai'
-import shallowequal from 'shallowequal'
+// import shallowequal from 'shallowequal'
 
 import { QueryBuilder, Filter } from '../index'
-import dummyQuery1 from '../fixtures/query1'
-import dummyQuery2 from '../fixtures/query2'
+// import dummyQuery1 from '../fixtures/query1'
+// import dummyQuery2 from '../fixtures/query2'
 import dummyItems1 from '../fixtures/items1'
 import dummyItems2 from '../fixtures/items2'
 
@@ -28,7 +28,7 @@ describe('A `Filter`s `returnFilteredIndexes` method should return the full arra
 describe('A `Filter`s `run` method should filter based on the `Query` instance that it’s passed', () => {
   it('should filter the items', () => {
     const filter = new Filter()
-    
+
     let query = new QueryBuilder().add('boolTestField', {
       is: true
     })
@@ -50,18 +50,18 @@ describe('A `Filter` constructor should accept a `nestedFilterFieldsObject` prop
     const filter = new Filter({
       nestedFilterFieldsObject: 'filterFields'
     })
-    
+
     let query = new QueryBuilder().add('boolTestField', {
       is: true
     })
-    const filtered = filter.run(dummyItems1, query)
+    const filtered = filter.run(dummyItems2, query)
     expect(Array.isArray(filtered)).to.equal(true)
     expect(filtered.length).to.equal(1)
 
     let query2 = new QueryBuilder().add('boolTestField', {
       is: false
     })
-    const filtered2 = filter.run(dummyItems1, query2)
+    const filtered2 = filter.run(dummyItems2, query2)
     expect(Array.isArray(filtered2)).to.equal(true)
     expect(filtered2.length).to.equal(2)
   })

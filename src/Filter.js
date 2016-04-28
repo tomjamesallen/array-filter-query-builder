@@ -1,8 +1,9 @@
 import assign from 'object-assign'
-const ORIGINAL_INDEX_KEY = '__filterOriginalIndex'
+import comparatorMethods from './comparatorMethods'
 
+const ORIGINAL_INDEX_KEY = '__filterOriginalIndex'
 const defaultConfig = {
-  nestedFilters: false
+  nestedFilterFieldsObject: false
 }
 
 export default class Filter {
@@ -10,14 +11,40 @@ export default class Filter {
     this.config = assign(defaultConfig, instanceConfig)
   }
 
-  testQueryArgument(item, queryArgument) {
-    // console.log('testQueryArgument', {
-    //   item, queryArgument
-    // })
-    return true
+  _getFieldValue(item, fieldKey) {
+    let filterFields = item
+    if (this.config.nestedFilterFieldsObject) {
+      if (typeof item[this.config.nestedFilterFieldsObject] === 'object') {
+        filterFields = item[this.config.nestedFilterFieldsObject]
+      }
+      else return null
+    }
+
+    if (typeof filterFields[fieldKey] !== 'undefined') {
+      return filterFields[fieldKey]
+    }
+    else {
+      return null
+    }
   }
 
-  getQueryArguments(query) {
+  _testComparator(fieldValue, comparator, testValue) {
+    if (typeof comparatorMethods[comparator] !== 'function') {
+      return false
+    }
+    return comparatorMethods[comparator](fieldValue, testValue)
+  }
+
+  _testQueryArgument(item, queryArgument) {
+    const [ fieldKey, comparator, testValue ] = queryArgument
+    const fieldValue = this._getFieldValue(item, fieldKey)
+
+    if (fieldValue === null) return false
+
+    return this._testComparator(fieldValue, comparator, testValue)
+  }
+
+  _getQueryArguments(query) {
     let queryArguments = []
     if (query && typeof query.serialise === 'function') {
       let serialised = query.serialise()
@@ -25,7 +52,6 @@ export default class Filter {
         queryArguments = serialised
       }
     }
-
     return queryArguments
   }
 
@@ -35,12 +61,12 @@ export default class Filter {
       return item
     })
 
-    const queryArguments = this.getQueryArguments(query)
+    const queryArguments = this._getQueryArguments(query)
 
     items = items.filter((item) => {
       let passed = true
       queryArguments.forEach((queryArgument) => {
-        if (!this.testQueryArgument(item, queryArgument)) {
+        if (!this._testQueryArgument(item, queryArgument)) {
           passed = false
         }
       })
