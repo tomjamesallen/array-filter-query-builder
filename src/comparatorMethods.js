@@ -31,6 +31,22 @@ export default {
       return hasMatch
     }
   },
+  anyMatchesAny(array1, array2) {
+    let hasMatch = false
+    if (!Array.isArray(array1)) {
+      if (this.isOneOf(array1, array2)) {
+        hasMatch = true
+      }
+    }
+    else {
+      array1.forEach((item) => {
+        if (this.isOneOf(item, array2)) {
+          hasMatch = true
+        }
+      })
+    }
+    return hasMatch
+  },
   isAtLeast(val1, val2) {
     return val1 >= val2
   },
