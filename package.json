@@ -1,6 +1,6 @@
 {
   "name": "array-filter-query-builder",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Provides a query builder and filter to filter array of items.",
   "main": "lib/index.js",
   "scripts": {
