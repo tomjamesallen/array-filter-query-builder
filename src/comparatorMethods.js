@@ -30,8 +30,17 @@ export default {
       })
       return hasMatch
     }
+  },
+  isAtLeast(val1, val2) {
+    return val1 >= val2
+  },
+  isLessThanOrEqualTo(val1, val2) {
+    return val1 <= val2
+  },
+  isMoreThan(val1, val2) {
+    return val1 > val2
+  },
+  isLessThan(val1, val2) {
+    return val1 < val2
   }
-  // ,
-  // isAtLeast(input) {},
-  // isOneOf(input) {},
 }
