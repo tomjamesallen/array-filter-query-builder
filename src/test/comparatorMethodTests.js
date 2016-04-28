@@ -94,19 +94,53 @@ describe('Comparator methods', () => {
   })
 
   describe('#isAtLeast', () => {
-    
+    it('should test that a numeric field value is at least as large (greater than or equal to) the given value', () => {
+      const filter = new Filter()
+      const query = new QueryBuilder('numericTestField', {
+        isAtLeast: 5
+      })
+      const filteredIndexes = filter.returnFilteredIndexes(dummyItems1, query)
+      expect(filteredIndexes.length).to.equal(2)
+      expect(filteredIndexes[0]).to.equal(1)
+      expect(filteredIndexes[1]).to.equal(2)
+    })
   })
 
   describe('#isLessThanOrEqualTo', () => {
-    
+    it('should test that a numeric field value is less than or equal to the given value', () => {
+      const filter = new Filter()
+      const query = new QueryBuilder('numericTestField', {
+        isLessThanOrEqualTo: 5
+      })
+      const filteredIndexes = filter.returnFilteredIndexes(dummyItems1, query)
+      expect(filteredIndexes.length).to.equal(2)
+      expect(filteredIndexes[0]).to.equal(0)
+      expect(filteredIndexes[1]).to.equal(1)
+    })
   })
 
   describe('#isMoreThan', () => {
-    
+    it('should test that a numeric field value is more than the given value', () => {
+      const filter = new Filter()
+      const query = new QueryBuilder('numericTestField', {
+        isMoreThan: 5
+      })
+      const filteredIndexes = filter.returnFilteredIndexes(dummyItems1, query)
+      expect(filteredIndexes.length).to.equal(1)
+      expect(filteredIndexes[0]).to.equal(2)
+    })
   })
 
   describe('#isLessThan', () => {
-    
+    it('should test that a numeric field value is less than the given value', () => {
+      const filter = new Filter()
+      const query = new QueryBuilder('numericTestField', {
+        isLessThan: 5
+      })
+      const filteredIndexes = filter.returnFilteredIndexes(dummyItems1, query)
+      expect(filteredIndexes.length).to.equal(1)
+      expect(filteredIndexes[0]).to.equal(0)
+    })
   })
 
   describe('#customComparatorMethod', () => {
