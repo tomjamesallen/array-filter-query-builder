@@ -13,6 +13,12 @@ export default class Filter {
   }
 
   _getFieldValue(item, fieldKey) {
+    if (fieldKey === '$item') {
+      return item
+    }
+    if (fieldKey === '$index') {
+      return item[ORIGINAL_INDEX_KEY]
+    }
     let filterFields = item
     if (this.config.nestedFilterFieldsObject) {
       if (typeof item[this.config.nestedFilterFieldsObject] === 'object') {
@@ -33,8 +39,8 @@ export default class Filter {
     if (typeof comparatorMethods[comparator] === 'function') {
       return comparatorMethods[comparator](fieldValue, testValue)
     }
-    else if (typeof this.customComparatorMethods[comparator] === 'function') {
-      return this.customComparatorMethods[comparator](fieldValue, testValue)
+    else if (typeof this.config.customComparatorMethods[comparator] === 'function') {
+      return this.config.customComparatorMethods[comparator](fieldValue, testValue)
     }
     else {
       return false
@@ -97,9 +103,5 @@ export default class Filter {
     return this.returnFilteredItemsData(items, query).map((item) => {
       return item[ORIGINAL_INDEX_KEY]
     })
-  }
-
-  updateConfig(instanceConfig) {
-    this.config = assign(defaultConfig, instanceConfig)
   }
 }
