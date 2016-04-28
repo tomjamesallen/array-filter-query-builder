@@ -21,7 +21,8 @@
   "homepage": "https://github.com/tomjamesallen/array-filter-query-builder#readme",
   "dependencies": {
     "clone": "^1.0.2",
-    "object-assign": "^4.0.1"
+    "object-assign": "^4.0.1",
+    "shallowequal": "^0.2.2"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
