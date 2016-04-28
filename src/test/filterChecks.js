@@ -27,10 +27,42 @@ describe('A `Filter`s `returnFilteredIndexes` method should return the full arra
 
 describe('A `Filter`s `run` method should filter based on the `Query` instance that it’s passed', () => {
   it('should filter the items', () => {
+    const filter = new Filter()
+    
     let query = new QueryBuilder().add('boolTestField', {
       is: true
     })
-    const filtered = new Filter().run(dummyItems1, query)
-    // console.log(filtered)
+    const filtered = filter.run(dummyItems1, query)
+    expect(Array.isArray(filtered)).to.equal(true)
+    expect(filtered.length).to.equal(1)
+
+    let query2 = new QueryBuilder().add('boolTestField', {
+      is: false
+    })
+    const filtered2 = filter.run(dummyItems1, query2)
+    expect(Array.isArray(filtered2)).to.equal(true)
+    expect(filtered2.length).to.equal(2)
+  })
+})
+
+describe('A `Filter` constructor should accept a `nestedFilterFieldsObject` property, which defines where to look for the filterFields', () => {
+  it('should filter the items based on the nested filter fields', () => {
+    const filter = new Filter({
+      nestedFilterFieldsObject: 'filterFields'
+    })
+    
+    let query = new QueryBuilder().add('boolTestField', {
+      is: true
+    })
+    const filtered = filter.run(dummyItems1, query)
+    expect(Array.isArray(filtered)).to.equal(true)
+    expect(filtered.length).to.equal(1)
+
+    let query2 = new QueryBuilder().add('boolTestField', {
+      is: false
+    })
+    const filtered2 = filter.run(dummyItems1, query2)
+    expect(Array.isArray(filtered2)).to.equal(true)
+    expect(filtered2.length).to.equal(2)
   })
 })
