@@ -7,7 +7,8 @@ export default [
     objectWithKeys: {
       key1: 0,
       key2: 1
-    }
+    },
+    multiMatch: ['FirstRef', 'SecondRef']
   },
   {
     name: 'Product 2',
@@ -17,7 +18,8 @@ export default [
     objectWithKeys: {
       key1: 2,
       key2: 3
-    }
+    },
+    multiMatch: ['SecondRef', 'ThirdRef']
   },
   {
     name: 'Product 3',
@@ -27,6 +29,7 @@ export default [
     objectWithKeys: {
       key1: 4,
       key2: 5
-    }
+    },
+    multiMatch: 'ThirdRef'
   }
 ]
