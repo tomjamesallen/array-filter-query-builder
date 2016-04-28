@@ -1,3 +1,4 @@
 require('./checkTypes')
-require('./queryBuilderChecks')
-require('./filterChecks')
+require('./queryBuilderTests')
+require('./filterTests')
+require('./comparatorMethodTests')
