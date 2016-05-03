@@ -2,7 +2,7 @@ import shallowequal from 'shallowequal'
 
 export default function ComparatorMethods(config) {
   function convertNumberToString(val) {
-    if (config.coerceStringCompatators &&
+    if (config.coerceStringComparators &&
         typeof val === 'number') {
       val = val.toString()
     }
@@ -10,7 +10,7 @@ export default function ComparatorMethods(config) {
   }
 
   function convertStringToNumber(val) {
-    if (config.coserceNumericComparators &&
+    if (config.coerceNumericComparators &&
         typeof val === 'string') {
       val = parseFloat(val)
     }

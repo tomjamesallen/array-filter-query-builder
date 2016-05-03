@@ -8,8 +8,8 @@ export default class Filter {
   constructor(instanceConfig) {
     this.config = assign({
       nestedFilterFieldsObject: false,
-      coerceStringCompatators: true,
-      coserceNumericComparators: true,
+      coerceStringComparators: true,
+      coerceNumericComparators: true,
       customComparatorMethods: {}
     }, instanceConfig)
     this.comparatorMethods = ComparatorMethods(this.config)
