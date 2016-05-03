@@ -1,5 +1,5 @@
 import assign from 'object-assign'
-import comparatorMethods from './comparatorMethods'
+import ComparatorMethods from './ComparatorMethods'
 import clone from 'clone'
 
 const ORIGINAL_INDEX_KEY = '__filterOriginalIndex'
@@ -36,8 +36,8 @@ export default class Filter {
   }
 
   _testComparator(fieldValue, comparator, testValue) {
-    if (typeof comparatorMethods[comparator] === 'function') {
-      return comparatorMethods[comparator](fieldValue, testValue)
+    if (typeof ComparatorMethods[comparator] === 'function') {
+      return ComparatorMethods[comparator](fieldValue, testValue)
     }
     else if (typeof this.config.customComparatorMethods[comparator] === 'function') {
       return this.config.customComparatorMethods[comparator](fieldValue, testValue)
