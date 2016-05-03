@@ -178,6 +178,18 @@ describe('Comparator methods', () => {
     })
   })
 
+  describe('#isEqual', () => {
+    it('should test that a numeric field value is the same as the given value', () => {
+      const filter = new Filter()
+      const query = new QueryBuilder('numericTestField', {
+        isEqual: 5
+      })
+      const filteredIndexes = filter.returnFilteredIndexes(dummyItems1, query)
+      expect(filteredIndexes.length).to.equal(1)
+      expect(filteredIndexes[0]).to.equal(1)
+    })
+  })
+
   describe('#customComparatorMethod', () => {
     it('should should accept a custom comparator method', () => {
       const filter = new Filter({
