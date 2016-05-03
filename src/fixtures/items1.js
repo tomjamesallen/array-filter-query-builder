@@ -4,6 +4,7 @@ export default [
     boolTestField: true,
     valueTestField: 'first',
     numericTestField: 0,
+    numberAsStringField: '00',
     objectWithKeys: {
       key1: 0,
       key2: 1
@@ -15,6 +16,7 @@ export default [
     boolTestField: false,
     valueTestField: 'second',
     numericTestField: 5,
+    numberAsStringField: '05',
     objectWithKeys: {
       key1: 2,
       key2: 3
@@ -26,6 +28,7 @@ export default [
     boolTestField: false,
     valueTestField: 'third',
     numericTestField: 10,
+    numberAsStringField: '10',
     objectWithKeys: {
       key1: 4,
       key2: 5
