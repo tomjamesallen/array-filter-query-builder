@@ -8,8 +8,11 @@ export default class Filter {
   constructor(instanceConfig) {
     this.config = assign({
       nestedFilterFieldsObject: false,
+      coerceStringCompatators: true,
+      coserceNumericComparators: true,
       customComparatorMethods: {}
     }, instanceConfig)
+    this.comparatorMethods = ComparatorMethods(this.config)
   }
 
   _getFieldValue(item, fieldKey) {
@@ -36,8 +39,8 @@ export default class Filter {
   }
 
   _testComparator(fieldValue, comparator, testValue) {
-    if (typeof ComparatorMethods[comparator] === 'function') {
-      return ComparatorMethods[comparator](fieldValue, testValue)
+    if (typeof this.comparatorMethods[comparator] === 'function') {
+      return this.comparatorMethods[comparator](fieldValue, testValue)
     }
     else if (typeof this.config.customComparatorMethods[comparator] === 'function') {
       return this.config.customComparatorMethods[comparator](fieldValue, testValue)
