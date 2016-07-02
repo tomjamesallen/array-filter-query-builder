@@ -114,7 +114,7 @@ To do this I needed to separate out the filter mechanism and the queries so that
 
     // ## Serialising / deserialising query arguments
     // All query arguments for a query can be serialised into a plain JS array,
-    // and then restored to a query object with the deserialise method.
+    // and then restored to a query object with the add method.
 
     // Serialise:
     const serialised = query.serialise()
