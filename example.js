@@ -1,5 +1,5 @@
-var QueryBuilder = require('array-filter-query-build').QueryBuilder;
-var Filter = require('array-filter-query-build').Filter
+var QueryBuilder = require('array-filter-query-builder').QueryBuilder;
+var Filter = require('array-filter-query-builder').Filter
 
 var filter = new Filter()
 var fixtures = [
